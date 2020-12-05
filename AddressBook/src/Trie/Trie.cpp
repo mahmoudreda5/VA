@@ -69,7 +69,7 @@ bool Trie::haveChildren(Trie const* curr)
 
 void Trie::bfs() {
 	queue<pair<Trie *, char>> q;
-	q.push({this, '#'});
+	q.push({this, '#'}); // # for root
 
 	while(!q.empty()) {
 		pair<Trie *, char> element = q.front(); q.pop();
