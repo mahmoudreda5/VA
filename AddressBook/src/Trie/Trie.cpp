@@ -13,14 +13,14 @@ void Trie::insert(string key)
 {
     // start from root node
     Trie* curr = this;
-    for (int i = 0; i < key.length(); i++)
+    for (int i = 0; i < (int)key.length(); i++)
     {
         // create a new node if path doesn't exists
-        if (curr->character[key[i]] == nullptr)
-            curr->character[key[i]] = new Trie();
+        if (curr->character[key[i] - 'a'] == nullptr)
+            curr->character[key[i] - 'a'] = new Trie();
 
         // go to next node
-        curr = curr->character[key[i]];
+        curr = curr->character[key[i] - 'a'];
     }
 
     // mark current node as leaf
@@ -34,10 +34,10 @@ bool Trie::search(string key)
         return false;
 
     Trie* curr = this;
-    for (int i = 0; i < key.length(); i++)
+    for (int i = 0; i < (int)key.length(); i++)
     {
         // go to next node
-        curr = curr->character[key[i]];
+        curr = curr->character[key[i] - 'a'];
 
         // if string is invalid (reached end of path in Trie)
         if (curr == nullptr)

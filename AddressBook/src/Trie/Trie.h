@@ -10,7 +10,7 @@ public:
     Trie* character[ALPHABET_SIZE];
 
     Trie();
-    void insert(std::string);
-	bool search(std::string);
+    void insert(string);
+	bool search(string);
 	bool haveChildren(Trie const*);
 };
