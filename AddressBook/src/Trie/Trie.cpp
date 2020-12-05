@@ -1,52 +1,61 @@
 #include <bits/stdc++.h>
-#include "Trie.h";
+#include "Trie.h"
 
 using namespace std;
 
-Trie::Trie() {
+Trie::Trie()
+{
 	this->isLeaf = false;
+	this->address = "";
 	for (int i = 0; i < ALPHABET_SIZE; i++)
 		this->character[i] = nullptr;
 }
 
-void Trie::insert(string key)
+void Trie::insert(string name, string address)
 {
     // start from root node
     Trie* curr = this;
-    for (int i = 0; i < (int)key.length(); i++)
+    for (int i = 0; i < (int)name.length(); i++)
     {
         // create a new node if path doesn't exists
-        if (curr->character[key[i] - 'a'] == nullptr)
-            curr->character[key[i] - 'a'] = new Trie();
+    	// don't care about spaces
+    	if(name[i] >= 'a' && name[i] <= 'z') {
+    		 if (curr->character[name[i] - 'a'] == nullptr)
+				curr->character[name[i] - 'a'] = new Trie();
 
-        // go to next node
-        curr = curr->character[key[i] - 'a'];
+			// go to next node
+			curr = curr->character[name[i] - 'a'];
+    	}
     }
 
     // mark current node as leaf
     curr->isLeaf = true;
+    curr->address = address;
 }
 
-bool Trie::search(string key)
+string Trie::search(string name)
 {
     // return false if Trie is empty
     if (this == nullptr)
-        return false;
+        return "";
 
     Trie* curr = this;
-    for (int i = 0; i < (int)key.length(); i++)
+    for (int i = 0; i < (int)name.length(); i++)
     {
         // go to next node
-        curr = curr->character[key[i] - 'a'];
+    	// don't care about spaces
+        if(name[i] >= 'a' && name[i] <= 'z'){
+        	curr = curr->character[name[i] - 'a'];
 
-        // if string is invalid (reached end of path in Trie)
-        if (curr == nullptr)
-            return false;
+			// if string is invalid (reached end of path in Trie)
+			if (curr == nullptr)
+				return "";
+        }
     }
 
     // if current node is a leaf and we have reached the
     // end of the string, return true
-    return curr->isLeaf;
+    return curr->address;
 }
 
 bool Trie::haveChildren(Trie const* curr)
@@ -56,4 +65,9 @@ bool Trie::haveChildren(Trie const* curr)
             return true;    // child found
 
     return false;
+}
+
+void Trie::visualize()
+{
+
 }
