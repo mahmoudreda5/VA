@@ -15,4 +15,7 @@ public:
 	string search(string);
 	bool haveChildren(Trie const*);
 	void visualize();
+
+private:
+	void bfs();
 };

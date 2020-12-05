@@ -67,7 +67,27 @@ bool Trie::haveChildren(Trie const* curr)
     return false;
 }
 
+void Trie::bfs() {
+	queue<pair<Trie *, char>> q;
+	q.push({this, '#'});
+
+	while(!q.empty()) {
+		pair<Trie *, char> element = q.front(); q.pop();
+		Trie* curr = element.first; char parent = element.second;
+
+		cout << "parent: " << parent << " children: ";
+		for(int i = 0; i < ALPHABET_SIZE; i++) if(curr->character[i] != nullptr) {
+			cout << (char) ('a' + i) << " ";
+			q.push({curr->character[i], 'a' +  i});
+		}
+
+		cout << "\n";
+	}
+}
+
 void Trie::visualize()
 {
-
+	// visualize trie levels using BFS algorithm
+	bfs();
 }
+
