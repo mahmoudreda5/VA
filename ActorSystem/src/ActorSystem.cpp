@@ -7,10 +7,12 @@
 //============================================================================
 
 #include <iostream>
+#include "Actor/Actor.h"
 using namespace std;
 
 int main() {
 
-
+	CountWithValueActor* actor = new CountWithValueActor("mahmoud reda", 7);
+	cout << actor->name << "\n";
 	return 0;
 }

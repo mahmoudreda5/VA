@@ -8,11 +8,11 @@ public:
 	string name;
 	int count;
 
-	int increase() = 0;
-	int decrease() = 0;
+	virtual int increase() = 0;
+	virtual int decrease() = 0;
 };
 
-class DefaultCountActor: Actor {
+class DefaultCountActor: public Actor {
 public:
 
 	DefaultCountActor(string);
@@ -21,7 +21,7 @@ public:
 	int decrease();
 };
 
-class CountWithValueActor: Actor {
+class CountWithValueActor: public Actor {
 public:
 	int increment;
 
